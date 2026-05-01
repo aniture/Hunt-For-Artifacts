@@ -118,3 +118,97 @@
   transform: translateY(-2px);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
+
+/* Hero gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, hsl(173 80% 55%), hsl(159 61% 60%) 60%, hsl(38 95% 65%));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ---- Aurora background ---- */
+.aurora-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 80%);
+}
+.aurora-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.55;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+.aurora-blob-1 {
+  top: -8%;
+  left: 8%;
+  width: 40rem;
+  height: 40rem;
+  background: radial-gradient(circle at 30% 30%, hsl(173 80% 35% / 0.65), transparent 65%);
+  animation: aurora-1 18s ease-in-out infinite;
+}
+.aurora-blob-2 {
+  top: 4%;
+  right: 4%;
+  width: 36rem;
+  height: 36rem;
+  background: radial-gradient(circle at 70% 30%, hsl(159 61% 50% / 0.55), transparent 65%);
+  animation: aurora-2 22s ease-in-out infinite;
+}
+.aurora-blob-3 {
+  bottom: -10%;
+  left: 30%;
+  width: 44rem;
+  height: 44rem;
+  background: radial-gradient(circle at 50% 50%, hsl(38 95% 55% / 0.32), transparent 70%);
+  animation: aurora-3 26s ease-in-out infinite;
+}
+@keyframes aurora-1 { 0%,100% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(6%,4%,0) scale(1.08);} }
+@keyframes aurora-2 { 0%,100% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(-5%,3%,0) scale(1.05);} }
+@keyframes aurora-3 { 0%,100% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(3%,-4%,0) scale(1.1);} }
+
+/* ---- Spotlight card ---- */
+.spotlight-card { --mx: 50%; --my: 50%; }
+.spotlight-card__glow {
+  background: radial-gradient(480px circle at var(--mx) var(--my), hsl(173 80% 50% / 0.35), transparent 40%);
+}
+
+/* ---- Shimmer button ---- */
+.shimmer-button { isolation: isolate; }
+.shimmer-button__halo::before,
+.shimmer-button__halo::after { content: ""; position: absolute; inset: -150%; z-index: 0; }
+.shimmer-button__halo::before {
+  background: conic-gradient(from 0deg, transparent 0deg, var(--shimmer-color) 60deg, transparent 120deg);
+  animation: shimmer-spin 2.6s linear infinite;
+}
+.shimmer-button__halo::after {
+  background: conic-gradient(from 180deg, transparent 0deg, hsl(159 61% 50%) 60deg, transparent 120deg);
+  animation: shimmer-spin 3.4s linear infinite reverse;
+  opacity: 0.55;
+}
+.shimmer-button__inner {
+  position: absolute;
+  inset: 1px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  background: var(--shimmer-bg);
+  padding: 0 1.75rem;
+  transition: background 200ms ease;
+}
+.shimmer-button:hover .shimmer-button__inner { background: color-mix(in oklab, var(--shimmer-bg), white 6%); }
+@keyframes shimmer-spin { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-blob,
+  .shimmer-button__halo::before,
+  .shimmer-button__halo::after { animation: none !important; }
+}
